@@ -19,10 +19,9 @@ class App extends Component  {
     }
 
     render() {
-        console.log(this.props);
         const posts = this.props.posts.map((post) => {
             return (
-                <Post author={post.author.username} content={post.content} created_date={post.created_date} />
+                <Post author={post.author.username} content={post.content} created_date={post.created_date} reference={post.reference} />
             )
         })
         return (

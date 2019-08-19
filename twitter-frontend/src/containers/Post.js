@@ -20,19 +20,20 @@ class Post extends Component {
         } else {
             spand_time_stamp = `${calc(duration, 1000 * 60 * 60 * 24)}일 전`;
         }
-        const days = duration / (1000 * 3600 * 24);
-        const hours = days / 24;
 
-        console.log(days);
+        console.log(this.props);
 
         return (
-            <div className="post">
+            <div className={this.props.isRef ? "ref-post" : "post"}>
                 <div className="title">
                     <span>{this.props.author}</span>
                 </div>
                 <div className="content">
                     <p>{this.props.content}</p>
-                    
+                    {this.props.reference != null && 
+                        <Post author={this.props.reference.author.username} content={this.props.reference.content} 
+                            created_date={this.props.reference.created_date} isRef={true} /> 
+                    }
                 </div>
                 <hr></hr>
                 <div className="footer text-right">
@@ -53,5 +54,9 @@ class Post extends Component {
         );
     }
 }
+
+Post.defaultProps = {
+    isRef: false
+};
 
 export default Post;

@@ -26,12 +26,13 @@ const postReducer = (state = initialState, action) => {
                     },
                     content: value.content,
                     created_date: value.created_date,
-                    reference: {
+                    reference: (value.reference__author__username ? {
                         author: {
                             username: value.reference__author__username,
                         },
-                        content: value.reference__content
-                    }
+                        content: value.reference__content,
+                        created_date: value.reference__created_date,
+                    } : null)
                 };
             });
 
