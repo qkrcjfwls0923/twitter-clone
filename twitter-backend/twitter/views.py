@@ -15,10 +15,6 @@ def ParseRequest(request):
     return json.loads(request.body)
 
 # Create your views here.
-class PostView(View):
-    def get(self, request):
-        return render(request, 'twitter/post_list.html', {})
-
 class SigninView(View):
     def get(self, request):
         form = UserForm()
@@ -61,7 +57,11 @@ class PostListView(ListView):
 
 class PostManagementView(View):
     def get(self, request):
-        return render(request, 'twitter/post_list.html', {})
+        queryset = Post.objects.all()[:5]
+        posts = list(queryset.values('id', 'author__username', 'content', 'created_date',
+            'reference__author__username', 'reference__content'))
+        print(posts)
+        return JsonResponse(posts, safe=False)
 
     def post(self, request):
         author = request.user
