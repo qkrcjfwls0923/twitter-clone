@@ -57,7 +57,7 @@ class PostListView(ListView):
 
 class PostManagementView(View):
     def get(self, request):
-        queryset = Post.objects.all()[:5]
+        queryset = Post.objects.order_by('-created_date')[:5]
         posts = list(queryset.values('id', 'author__username', 'content', 'created_date',
             'reference__author__username', 'reference__content'))
         print(posts)
