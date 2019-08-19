@@ -6,7 +6,7 @@ const initialState = {
         username: "admin",
     },
     content: "for the test",
-    create_date: "2019-08-10T06:19:44.304Z",
+    created_date: "2019-08-10T06:19:44.304Z",
     reference: {
         author: {
             username: null
@@ -25,7 +25,7 @@ const postReducer = (state = initialState, action) => {
                         username: value.author__username
                     },
                     content: value.content,
-                    create_date: value.create_date,
+                    created_date: value.created_date,
                     reference: {
                         author: {
                             username: value.reference__author__username,

@@ -22,7 +22,7 @@ class App extends Component  {
         console.log(this.props);
         const posts = this.props.posts.map((post) => {
             return (
-                <Post author={post.author.username} content={post.content} />
+                <Post author={post.author.username} content={post.content} created_date={post.created_date} />
             )
         })
         return (
