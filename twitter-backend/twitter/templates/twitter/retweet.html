@@ -1,0 +1,6 @@
+{% extends 'twitter/base.html' %}
+
+{% block content %}
+    {% include "twitter/post.html" with post=target_post %}
+    {% include "twitter/write.html" with title="리트윗" action="retweet" hidden_content=target_post.id %}
+{% endblock %}

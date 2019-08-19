@@ -1,0 +1,33 @@
+{% load post_extras %}
+
+<div class="post">
+    <div class="title">
+        <span>{{ post.author.username }}</span>
+    </div>
+    <div class="content">
+        <p>{{ post.content }}</p>
+        {% if post.reference != None %}
+            {% include 'twitter/ref_post.html' with post=post.reference %}
+        {% endif %}
+    </div>
+    <hr>
+    <div class="footer text-right">
+        <spawn class="footer-item time-spand-stamp">{{ post.created_date | calc_spand}}</spawn>
+        <span class="footer-item">
+            <a href="retweet?post-id={{post.id}}">
+                <i class="fas fa-retweet"></i>
+            </a>
+        </span>
+        <span class="footer-item">
+            <a href="">
+                <i class="far fa-thumbs-up big-icon"></i>
+                <spawn>{{ post.like_count }}</spawn>
+            </a>
+        </span>
+        {% if post.author == user %}
+        <span id="post-{{post.id}}" data-id="{{post.id}}" class="footer-item remove-post">
+            <i class="fas fa-trash"></i>
+        </span>
+        {% endif %}
+    </div>
+</div>

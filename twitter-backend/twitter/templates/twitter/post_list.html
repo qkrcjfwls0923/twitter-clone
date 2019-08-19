@@ -1,0 +1,11 @@
+{% extends 'twitter/base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    {% include "twitter/write.html" with title="새 포스트" action="post" %}
+    {% endif %}
+    
+    {% for post in object_list %}
+        {% include "twitter/post.html" with post=post %}
+    {% endfor %}
+{% endblock %}
