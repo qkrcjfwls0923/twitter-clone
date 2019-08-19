@@ -4,6 +4,12 @@ class Post extends Component {
     state = {
         like_count: 0
     };
+
+    componentDidMount() {
+        this.setState({
+            like_count: this.props.like_count
+        });
+    }
     
     render() {
         const duration = Date.now() - new Date(this.props.created_date);
@@ -21,8 +27,6 @@ class Post extends Component {
             spand_time_stamp = `${calc(duration, 1000 * 60 * 60 * 24)}일 전`;
         }
 
-        console.log(this.props);
-
         return (
             <div className={this.props.isRef ? "ref-post" : "post"}>
                 <div className="title">
@@ -32,7 +36,9 @@ class Post extends Component {
                     <p>{this.props.content}</p>
                     {this.props.reference != null && 
                         <Post author={this.props.reference.author.username} content={this.props.reference.content} 
-                            created_date={this.props.reference.created_date} isRef={true} /> 
+                            created_date={this.props.reference.created_date} 
+                            like_count={this.props.reference.like_count}
+                            isRef={true} /> 
                     }
                 </div>
                 <hr></hr>

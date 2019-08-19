@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.views.generic import View, ListView
+from django.db.models import Count
 
 from .forms import UserForm, LoginForm
 from .models import Post, Like
@@ -59,7 +60,9 @@ class PostManagementView(View):
     def get(self, request):
         queryset = Post.objects.order_by('-created_date')[:5]
         posts = list(queryset.values('id', 'author__username', 'content', 'created_date',
-            'reference__author__username', 'reference__content'))
+            'reference__author__username', 'reference__content', 'reference__created_date')
+            .annotate(like_count=Count('likes'), 
+                reference__like_count=Count('reference__likes')))
         print(posts)
         return JsonResponse(posts, safe=False)
 
